@@ -1,5 +1,5 @@
 interface ICredentials {
-  id?: number;
+  id: number;
   username: string;
   password: string;
   createdAt: Date;
