@@ -1,9 +1,9 @@
 import { Router } from "express";
 
 import {
-  createAppointmet,
-  editAppointmet,
-  DeletAppointmet,
+  createAppointment,
+  editAppointment,
+  deleteAppointment,
   getAppointmentById,
   getAllAppointments,
 } from "../controllers/appointments-controller";
@@ -15,11 +15,11 @@ appointmentsRouter.get("/", getAllAppointments);
 
 appointmentsRouter.get("/:id", getAppointmentById);
 
-appointmentsRouter.post("/schedule", createAppointmet);
+appointmentsRouter.post("/schedule", createAppointment);
 
-appointmentsRouter.post("/cancel", DeletAppointmet);
+appointmentsRouter.post("/cancel", deleteAppointment);
 
-appointmentsRouter.put("/edit", editAppointmet);
+appointmentsRouter.put("/edit", editAppointment);
 
 // Default export
 // const appointmentsRouter = Router();

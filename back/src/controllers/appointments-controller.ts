@@ -1,34 +1,35 @@
 import { Request, Response } from "express";
+import { IAppointment } from "../interfaces/appointment-interface";
 
-//! Obtener todos los turnos
+export class AppointmentsController {
+  appointmentService: appointmentService;
+  constructor() {
+    this.appointmentServiceService = new appointmentServiceService();
+  }
+  //! Obtener todos los turnos
+  async getAllAppointments(req: Request<{}, IAppointment[]>, res: Response) {
+    res.json();
+  }
 
-export const getAllAppointments = async (
-  req: Request<{}, IUsers[]>,
-  res: Response
-) => {
-  res.json();
-};
+  //! traer 1 turno por id
 
-//! traer 1 turno por id
-
-export const getAppointmentById = async (req: Request, res: Response) => {
-  rest.status(200).json();
-};
+  async getById(req: Request<AppointmentByIdDTO>, res: Response) {}
+}
 
 //! crear un turno
 
-export const createAppointmet = async (req: Request, res: Response) => {
-  rest.status(200).json();
+export const createAppointment = async (req: Request, res: Response) => {
+  res.status(200).json();
 };
 
 //! cancelar un turno
 
-export const DeletAppointmet = async (req: Request, res: Response) => {
-  rest.status(200).json();
+export const deleteAppointment = async (req: Request, res: Response) => {
+  res.status(200).json();
 };
 
 //! editar un turno
 
-export const editAppointmet = async (req: Request, res: Response) => {
-  rest.status(200).json();
+export const editAppointment = async (req: Request, res: Response) => {
+  res.status(200).json();
 };

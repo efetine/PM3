@@ -1,9 +1,11 @@
-export interface IAppointments {
-  id?: number;
+import { IUser } from "./user-interface";
+
+export interface IAppointment {
+  id: number;
   date: Date;
   time: string;
-  userld: number;
   status: "active" | "cancelled";
-  createdAt: Date;
-  updatedAt: Date;
+  // user: IUser;
+  // createdAt: Date;
+  // updatedAt: Date;
 }

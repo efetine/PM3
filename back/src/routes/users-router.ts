@@ -1,21 +1,21 @@
 import { Router } from "express";
 
-import {
-  getAllUsers,
-  getUserById,
-  userRegister,
-  userLogin,
-  userDelete,
-} from "../controllers/users-controller";
+import { UsersController } from "../controllers/users-controller";
+import { validateCreateUser } from "../middlewares/validate-user-create";
 
-export const usersRouter = Router();
+const usersRouter = Router();
+
+const { getAllUsers, getUserById, userRegister, userLogin, userDelete } =
+  new UsersController();
 
 usersRouter.get("/", getAllUsers);
 
 usersRouter.get("/:id", getUserById);
 
-usersRouter.post("/register", userRegister);
+usersRouter.post("/register", validateCreateUser, userRegister);
 
 usersRouter.post("/login", userLogin);
 
-usersRouter.delete("/delete", userDelete);
+usersRouter.delete("/:id", userDelete);
+
+export { usersRouter };

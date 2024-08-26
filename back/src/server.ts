@@ -12,7 +12,7 @@ server.use(express.json());
 server.use(morgan("dev"));
 
 // Routers
-server.use(appointmentsRouter);
-server.use(usersRouter);
+server.use("/appointments", appointmentsRouter);
+server.use("/users", usersRouter);
 
 export { server };
