@@ -1,25 +1,22 @@
 import { Router } from "express";
 
-import {
-  createAppointment,
-  editAppointment,
-  deleteAppointment,
-  getAppointmentById,
-  getAllAppointments,
-} from "../controllers/appointments-controller";
+import { AppointmentsController } from "../controllers/appointments-controller";
+import { validateCreateAppointment } from "../middlewares/validate-appointment-create";
+
+const { create, cancel, getById, getAll } = new AppointmentsController();
 
 export const appointmentsRouter = Router();
 // Named export
 
-appointmentsRouter.get("/", getAllAppointments);
+appointmentsRouter.get("/", getAll);
 
-appointmentsRouter.get("/:id", getAppointmentById);
+appointmentsRouter.get("/:id", getById);
 
-appointmentsRouter.post("/schedule", createAppointment);
+appointmentsRouter.post("/schedule", validateCreateAppointment, create);
 
-appointmentsRouter.post("/cancel", deleteAppointment);
+appointmentsRouter.post("/cancel", cancel);
 
-appointmentsRouter.put("/edit", editAppointment);
+// appointmentsRouter.put("/edit", editAppointment);
 
 // Default export
 // const appointmentsRouter = Router();

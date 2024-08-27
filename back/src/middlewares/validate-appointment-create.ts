@@ -6,9 +6,9 @@ export function validateCreateAppointment(
   next: NextFunction
 ) {
   const keys = {
-    name: "",
+    date: "",
     time: "",
-    status: "",
+    userId: "",
   };
   const missingsInputs: string[] = [];
 

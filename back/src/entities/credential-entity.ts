@@ -23,10 +23,4 @@ export class Credential implements ICredential {
 
   @Column()
   password: string;
-
-  @OneToOne(() => User, (user) => user.credential)
-  @JoinColumn({
-    name: "user_id",
-  })
-  user: User;
 }

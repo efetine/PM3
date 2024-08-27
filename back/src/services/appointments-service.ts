@@ -1,19 +1,26 @@
-import { IAppointment } from "../interfaces/appointment-interface";
+import { CreateAppointmentDTO } from "../dto/create-appointment-dto";
 import { AppointmentsRepository } from "../repositories/appointments-repository";
 
 export class AppointmentService {
-  appointmentRepository: AppointmentsRepository;
+  repository: AppointmentsRepository;
   constructor() {
-    this.appointmentRepository = new AppointmentRepository();
+    this.repository = new AppointmentsRepository();
   }
 
   //! Obtener todos los turnos
 
-  async getAll(): Promise<IAppointment> {}
-
   //! traer 1 turno por id
 
   //! crear un turno
+  async create(appointment: CreateAppointmentDTO) {
+    try {
+      const newAppointment = this.repository.create(appointment);
+
+      return newAppointment;
+    } catch {
+      throw Error("Cannot create appointment on service");
+    }
+  }
 
   //! cancelar un turno
 }

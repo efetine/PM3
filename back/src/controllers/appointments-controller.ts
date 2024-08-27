@@ -1,35 +1,47 @@
 import { Request, Response } from "express";
-import { IAppointment } from "../interfaces/appointment-interface";
+import { UserByIdDTO } from "../dto/user-by-id-dto";
+import { AppointmentService } from "../services/appointments-service";
+import { CreateAppointmentDTO } from "../dto/create-appointment-dto";
 
 export class AppointmentsController {
-  appointmentService: appointmentService;
+  service: AppointmentService;
   constructor() {
-    this.appointmentServiceService = new appointmentServiceService();
+    this.service = new AppointmentService();
   }
   //! Obtener todos los turnos
-  async getAllAppointments(req: Request<{}, IAppointment[]>, res: Response) {
+  getAll = async (req: Request<{}, UserByIdDTO>, res: Response) => {
     res.json();
-  }
+  };
 
   //! traer 1 turno por id
 
-  async getById(req: Request<AppointmentByIdDTO>, res: Response) {}
+  getById = async (req: Request<UserByIdDTO>, res: Response) => {
+    res.json();
+  };
+
+  //! crear un turno
+
+  create = async (
+    req: Request<{}, {}, CreateAppointmentDTO>,
+    res: Response
+  ) => {
+    const appointment = req.body;
+
+    try {
+      const createdAppointment = await this.service.create(appointment);
+
+      res.status(201).json(createdAppointment);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        error,
+      });
+    }
+  };
+
+  //! cancelar un turno
+
+  cancel = async (req: Request, res: Response) => {
+    res.status(200).json();
+  };
 }
-
-//! crear un turno
-
-export const createAppointment = async (req: Request, res: Response) => {
-  res.status(200).json();
-};
-
-//! cancelar un turno
-
-export const deleteAppointment = async (req: Request, res: Response) => {
-  res.status(200).json();
-};
-
-//! editar un turno
-
-export const editAppointment = async (req: Request, res: Response) => {
-  res.status(200).json();
-};

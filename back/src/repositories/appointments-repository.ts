@@ -29,10 +29,19 @@ export class AppointmentsRepository {
   //! crear un turno
 
   async create(appointment: CreateAppointmentDTO): Promise<Appointment> {
-    const newAppointment = this.repository.create(appointment);
-    const savedAppointment = await this.repository.save(newAppointment);
-
-    return savedAppointment;
+    const { userId, ...rest } = appointment;
+    const newAppointment = this.repository.create({
+      ...rest,
+      user: {
+        id: userId,
+      },
+    });
+    try {
+      const savedAppointment = await this.repository.save(newAppointment);
+      return savedAppointment;
+    } catch {
+      throw Error("Cannot create appointment on database");
+    }
   }
 
   //! cancelar un turno

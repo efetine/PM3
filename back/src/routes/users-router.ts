@@ -5,7 +5,7 @@ import { validateCreateUser } from "../middlewares/validate-user-create";
 
 const usersRouter = Router();
 
-const { getAllUsers, getUserById, userRegister, userLogin, userDelete } =
+const { getAllUsers, getUserById, userDelete, userLogin, userRegister } =
   new UsersController();
 
 usersRouter.get("/", getAllUsers);

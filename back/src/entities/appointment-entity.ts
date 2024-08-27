@@ -6,7 +6,10 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { User } from "./user-entity";
-import { IAppointment } from "../interfaces/appointment-interface";
+import {
+  AppointmentStatus,
+  IAppointment,
+} from "../interfaces/appointment-interface";
 
 @Entity({
   name: "appointments",
@@ -21,10 +24,17 @@ export class Appointment implements IAppointment {
   @Column()
   time: string;
 
-  @Column()
-  status: "active" | "cancelled";
+  @Column({
+    default: AppointmentStatus.ACTIVE,
+  })
+  status: AppointmentStatus;
 
-  @ManyToOne(() => User, (user) => user.appointments)
+  @Column()
+  description: string;
+
+  @ManyToOne(() => User, (user) => user.appointments, {
+    nullable: false,
+  })
   @JoinColumn({ name: "user_id" })
   user: User;
 }

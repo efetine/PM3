@@ -27,16 +27,18 @@ export class User implements IUser {
   })
   email: string;
 
-  @Column("integer")
-  age: number;
+  @Column()
+  birthdate: string;
 
   @Column()
-  active: boolean;
+  nDni: number;
 
   @OneToMany(() => Appointment, (appointment) => appointment.user)
   appointments: Appointment[];
 
-  @OneToOne(() => Credential, (credential) => credential.user)
+  @OneToOne(() => Credential, {
+    nullable: false,
+  })
   @JoinColumn({
     name: "credential_id",
   })

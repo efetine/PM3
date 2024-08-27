@@ -8,7 +8,10 @@ export function validateCreateUser(
   const keys = {
     name: "",
     email: "",
-    age: "",
+    birthdate: "",
+    nDni: "",
+    username: "",
+    password: "",
   };
   const missingsInputs: string[] = [];
 
