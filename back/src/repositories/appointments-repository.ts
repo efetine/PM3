@@ -12,18 +12,26 @@ export class AppointmentsRepository {
   }
   //! Obtener todos los turnos
   async getAll(): Promise<IAppointment[]> {
-    const appointments = await this.repository.find();
+    try {
+      const appointments = await this.repository.find();
 
-    return appointments;
+      return appointments;
+    } catch {
+      throw Error("Cannot create appointment on database");
+    }
   }
 
   //! traer 1 turno por id
   async getById({ id }: AppointmentByIdDTO): Promise<Appointment | null> {
-    const appointment = await this.repository.findOneBy({
-      id,
-    });
+    try {
+      const appointment = await this.repository.findOneBy({
+        id,
+      });
 
-    return appointment;
+      return appointment;
+    } catch {
+      throw Error("Cannot appointment on database");
+    }
   }
 
   //! crear un turno

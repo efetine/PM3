@@ -12,13 +12,14 @@ export class UsersController {
     this.usersService = new UsersService();
   }
 
-  getAllUsers = async (req: Request<{}, IUser[]>, res: Response) => {
+  getAllUsers = async (
+    req: Request,
+    res: Response<IUser[] | { error: string }>
+  ) => {
     try {
       const users = await this.usersService.getAll();
 
-      res.status(200).json({
-        users,
-      });
+      res.status(200).json(users);
     } catch {
       res.status(500).json({
         error: "Internal Server Error",
@@ -27,7 +28,10 @@ export class UsersController {
   };
 
   //! trae 1 usuario por id
-  getUserById = async (req: Request<UserByIdDTO>, res: Response) => {
+  getUserById = async (
+    req: Request<UserByIdDTO>,
+    res: Response<IUser | { error: string }>
+  ) => {
     const params = req.params;
 
     try {
@@ -52,7 +56,7 @@ export class UsersController {
 
   userRegister = async (
     req: Request<{}, {}, CreateUserWithCredentialDTO>,
-    res: Response
+    res: Response<IUser | { error: string }>
   ) => {
     const { name, email, birthdate, nDni, username, password } = req.body;
 
@@ -85,7 +89,10 @@ export class UsersController {
   };
 
   //! Deletear 1 usuario
-  userDelete = async (req: Request<UserByIdDTO>, res: Response) => {
+  userDelete = async (
+    req: Request<UserByIdDTO>,
+    res: Response<void | { error: string }>
+  ) => {
     const params = req.params;
 
     try {
