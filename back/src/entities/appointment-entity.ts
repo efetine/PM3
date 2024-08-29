@@ -29,8 +29,8 @@ export class Appointment implements IAppointment {
   })
   status: AppointmentStatus;
 
-  @Column()
-  description: string;
+  // @Column()
+  // description: string;
 
   @ManyToOne(() => User, (user) => user.appointments, {
     nullable: false,

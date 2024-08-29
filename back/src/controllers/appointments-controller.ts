@@ -4,7 +4,8 @@ import { AppointmentService } from "../services/appointments-service";
 import { CreateAppointmentDTO } from "../dto/create-appointment-dto";
 import { IAppointment } from "../interfaces/appointment-interface";
 import { AppointmentByIdDTO } from "../dto/appointment-by-id-dto";
-import { Appointment } from "../entities/appointment-entity";
+import { GetAllAppointmentDTO } from "../dto/get-all-appointments-dto";
+import { IUser } from "../interfaces/user-interface";
 
 export class AppointmentsController {
   service: AppointmentService;
@@ -15,14 +16,20 @@ export class AppointmentsController {
   // input: req: Request<{}, UserByIdDTO>, res: Response
   // output: Promise<Appointment[]>
   getAll = async (
-    req: Request,
-    res: Response<IAppointment[] | { error: string }>
+    req: Request<{}, {}, {}, GetAllAppointmentDTO>,
+    res: Response<
+      | {
+          user: IUser;
+        }
+      | { error: string }
+    >
   ): Promise<void> => {
+    const queryParams = req.query;
+
     try {
-      const Appointments = await this.service.getAll();
+      const Appointments = await this.service.getAll(queryParams);
       res.status(201).json(Appointments);
-    } catch (error) {
-      console.error(error);
+    } catch {
       res.status(500).json({ error: "Internal Server Error" });
     }
   };
@@ -38,11 +45,10 @@ export class AppointmentsController {
       const appointment = await this.service.getById({
         id: params.id,
       });
-      return appointment;
-      res.status(201).json();
-    } catch (error) {
-      console.error(error);
-      res.status(400).json({ error: "Not Found" });
+
+      res.status(201).json(appointment);
+    } catch {
+      res.status(404).json({ error: "Not Found" });
     }
   };
 
@@ -72,10 +78,19 @@ export class AppointmentsController {
     req: Request<AppointmentByIdDTO>,
     res: Response<IAppointment | { error: string }>
   ) => {
+    const appointment = req.params;
     try {
+      const isCanceled = await this.service.cancel(appointment);
+
+      if (isCanceled === false) {
+        res.status(404).json({
+          error: "NOT FOUND",
+        });
+        return;
+      }
+
       res.status(200).json();
     } catch (error) {
-      console.log(error);
       res.status(500).json({
         error,
       });

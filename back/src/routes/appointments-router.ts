@@ -14,7 +14,7 @@ appointmentsRouter.get("/:id", getById);
 
 appointmentsRouter.post("/schedule", validateCreateAppointment, create);
 
-appointmentsRouter.post("/cancel", cancel);
+appointmentsRouter.post("/cancel/:id", cancel);
 
 // appointmentsRouter.put("/edit", editAppointment);
 

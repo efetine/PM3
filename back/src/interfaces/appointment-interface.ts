@@ -7,7 +7,7 @@ export interface IAppointment {
   date: Date;
   time: string;
   status: AppointmentStatus;
-  description: string;
+  // description: string;
   // status: "active" | "cancelled";
   // user: IUser;
   // createdAt: Date;
