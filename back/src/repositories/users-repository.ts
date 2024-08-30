@@ -46,7 +46,7 @@ export class UsersRepository {
     }
   }
 
-  async delete({ id }: UserByIdDTO): Promise<void> {
+  async deleteById({ id }: UserByIdDTO): Promise<void> {
     const repository = AppDataSource.getRepository(User);
 
     const result = await repository.delete({
@@ -57,6 +57,31 @@ export class UsersRepository {
       return;
     } else {
       throw Error("Cannot delete user");
+    }
+  }
+
+  async login(
+    credential: ICredential
+  ): Promise<{ login: true; user: IUser } | { login: false }> {
+    try {
+      const user = await this.repository.findOne({
+        where: {
+          credential,
+        },
+      });
+
+      if (user === null) {
+        return {
+          login: false,
+        };
+      }
+
+      return {
+        login: true,
+        user,
+      };
+    } catch {
+      throw Error("Error on database");
     }
   }
 }

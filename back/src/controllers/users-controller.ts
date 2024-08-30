@@ -4,6 +4,7 @@ import { UsersService } from "../services/users-service";
 // import type { CreateUserDTO } from "../dto/create-user-dto";
 import type { UserByIdDTO } from "../dto/user-by-id-dto";
 import { CreateUserWithCredentialDTO } from "../dto/create-user-with-credential-dto";
+import { UserLoginDTO } from "../dto/user-login-dto";
 
 //! trae todos los usuarios
 export class UsersController {
@@ -12,10 +13,7 @@ export class UsersController {
     this.usersService = new UsersService();
   }
 
-  getAllUsers = async (
-    req: Request,
-    res: Response<IUser[] | { error: string }>
-  ) => {
+  getAll = async (req: Request, res: Response<IUser[] | { error: string }>) => {
     try {
       const users = await this.usersService.getAll();
 
@@ -28,7 +26,7 @@ export class UsersController {
   };
 
   //! trae 1 usuario por id
-  getUserById = async (
+  getById = async (
     req: Request<UserByIdDTO>,
     res: Response<IUser | { error: string }>
   ) => {
@@ -54,7 +52,7 @@ export class UsersController {
     }
   };
 
-  userRegister = async (
+  register = async (
     req: Request<{}, {}, CreateUserWithCredentialDTO>,
     res: Response<IUser | { error: string }>
   ) => {
@@ -84,19 +82,39 @@ export class UsersController {
   };
 
   //! logear 1 usuario
-  userLogin = async (req: Request, res: Response) => {
-    res.json();
+  login = async (
+    req: Request<{}, {}, UserLoginDTO>,
+    res: Response<
+      { login: true; user: IUser } | { login: false } | { error: string }
+    >
+  ) => {
+    const loginData = req.body;
+
+    try {
+      const data = await this.usersService.login(loginData);
+
+      if (data.login === true) {
+        res.status(200).json(data);
+        return;
+      }
+
+      res.status(404).json(data);
+    } catch {
+      res.status(500).json({
+        error: "Internal Server Error",
+      });
+    }
   };
 
   //! Deletear 1 usuario
-  userDelete = async (
+  deleteById = async (
     req: Request<UserByIdDTO>,
     res: Response<void | { error: string }>
   ) => {
     const params = req.params;
 
     try {
-      await this.usersService.delete({
+      await this.usersService.deleteById({
         id: params.id,
       });
       res.status(200).json();

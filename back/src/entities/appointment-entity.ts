@@ -19,7 +19,7 @@ export class Appointment implements IAppointment {
   id: number;
 
   @Column()
-  date: Date;
+  date: string;
 
   @Column()
   time: string;

@@ -1,9 +1,11 @@
 import { CreateCredentialDTO } from "../dto/create-credential-dto";
 import { CreateUserDTO } from "../dto/create-user-dto";
 import { UserByIdDTO } from "../dto/user-by-id-dto";
+import { UserLoginDTO } from "../dto/user-login-dto";
 import { IUser } from "../interfaces/user-interface";
 import { CredentialsRepository } from "../repositories/credentials-repository";
 import { UsersRepository } from "../repositories/users-repository";
+import { CredentialsService } from "./credentials-service";
 
 export class UsersService {
   usersRepository: UsersRepository;
@@ -32,9 +34,32 @@ export class UsersService {
     return newUser;
   }
 
-  async delete(userDTO: UserByIdDTO) {
-    const user = await this.usersRepository.delete(userDTO);
+  async deleteById(userDTO: UserByIdDTO) {
+    const user = await this.usersRepository.deleteById(userDTO);
 
     return user;
+  }
+
+  async login(
+    loginDTO: UserLoginDTO
+  ): Promise<{ login: true; user: IUser } | { login: false }> {
+    try {
+      const credentialsService = new CredentialsService();
+
+      const credential =
+        await credentialsService.getByUsernameAndPassword(loginDTO);
+
+      if (credential === null) {
+        return {
+          login: false,
+        };
+      }
+
+      const data = await this.usersRepository.login(credential);
+
+      return data;
+    } catch {
+      throw Error("Cannot login user");
+    }
   }
 }
