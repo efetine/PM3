@@ -28,7 +28,7 @@ export class AppointmentsController {
 
     try {
       const Appointments = await this.service.getAll(queryParams);
-      res.status(201).json(Appointments);
+      res.status(200).json(Appointments);
     } catch {
       res.status(500).json({ error: "Internal Server Error" });
     }
