@@ -1,0 +1,105 @@
+html {
+  font-size: 16px;
+}
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+  z-index: 1000;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  z-index: 1000;
+}
+
+.home-background {
+  background-image: url("https://i.pinimg.com/564x/2e/a4/8a/2ea48ad3dbe3c49fff45b1bca9fd156c.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-color: rgba(0, 0, 0, 0.1);
+  min-height: calc(100vh - 6rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.home-container {
+  width: 85%;
+  max-width: 100rem;
+  padding: 4rem;
+  color: white;
+  position: relative;
+  z-index: 1;
+}
+
+.internal-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+  gap: 20px;
+}
+
+.internal-item {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  border: 2px solid #8e2de2;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.internal-item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(4px);
+  z-index: -1;
+  opacity: 50%;
+}
+
+.internal-item-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(255, 251, 251);
+  text-align: center;
+  padding: 20px;
+  max-width: 80%;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.internal-item:hover {
+  border-color: #6c1d91;
+  box-shadow: 0 8px 16px rgba(128, 0, 128, 0.5);
+}
+
+.hover-shadow:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}

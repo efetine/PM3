@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import "./Appointments.css";
 import { AppointmentItem } from "../../components/Appointments/AppointmentItem";
+import { Banner } from "../../components/Banner/Banner";
 
 // import { useState } from "react";
 export function Appointments() {
@@ -30,21 +31,23 @@ export function Appointments() {
 
   return (
     <div>
-      <h1>Appointments</h1>
-      <button id="add-appointment">Agregar turno</button>
-
-      <div className="appointments-list">
-        {appointments.map((appointment) => {
-          return (
-            <AppointmentItem
-              key={appointment.id}
-              id={appointment.id}
-              date={appointment.date}
-              time={appointment.time}
-              status={appointment.status}
-            />
-          );
-        })}
+      <Banner />
+      <div>
+        <h1>Appointments</h1>
+        <button id="add-appointment">Agregar turno</button>
+        <div className="appointments-list">
+          {appointments.map((appointment) => {
+            return (
+              <AppointmentItem
+                key={appointment.id}
+                id={appointment.id}
+                date={appointment.date}
+                time={appointment.time}
+                status={appointment.status}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );

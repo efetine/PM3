@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
 export function Login({ setView }) {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <form>
+    <div className="login-container">
+      <form className="login-form">
         <h2>Inicia sesión</h2>
         <div>
           <label htmlFor="username">Usuario</label>
@@ -16,17 +17,17 @@ export function Login({ setView }) {
           <input id="password" type="password" placeholder="Contrasenia" />
         </div>
         <button type="submit">Inicia sesión</button>
+        <div className="register-section">
+          <h4>Si no tienes cuenta puedes registrarte</h4>
+          <button
+            onClick={() => {
+              navigate("/register");
+            }}
+          >
+            Registrate
+          </button>
+        </div>
       </form>
-      <div>
-        <h4>Si no tienes cuenta puedes registrarte</h4>
-        <button
-          onClick={() => {
-            navigate("/register");
-          }}
-        >
-          Registrate
-        </button>
-      </div>
     </div>
   );
 }

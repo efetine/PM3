@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { Home } from "./views/Home/Home";
+import { Information } from "./views/Information/Information";
 import { Register } from "./views/Register/Register";
 import { Login } from "./views/Login/Login";
 import { Appointments } from "./views/Appoitments/Appointments";
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "information",
+        element: <Information />,
       },
       {
         path: "register",
