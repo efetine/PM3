@@ -7,7 +7,7 @@ const createUserSchema = z
     name: z.string().min(3).max(50),
     email: z.string().email(),
     birthdate: z.string().date(),
-    nDni: z.number().min(7).max(8),
+    nDni: z.number().min(1000000).max(99999999),
   })
   .extend(userLoginSchema.shape);
 export function validateCreateUser(

@@ -27,7 +27,7 @@ export class UsersService {
   async create(user: CreateUserDTO, credential: CreateCredentialDTO) {
     const credentialsService = new CredentialsRepository();
 
-    const createdCredential = await credentialsService.create(credential);
+    const createdCredential = credentialsService.create(credential);
 
     const newUser = await this.usersRepository.create(user, createdCredential);
 

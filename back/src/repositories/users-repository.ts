@@ -30,19 +30,27 @@ export class UsersRepository {
 
   async create(user: CreateUserDTO, credential: ICredential): Promise<IUser> {
     try {
-      const createdUser = this.repository.create({
-        ...user,
-        credential,
+      const savedUser = await AppDataSource.transaction(async (manager) => {
+        const savedCredential = await manager.save(credential);
+
+        const createdUser = this.repository.create({
+          ...user,
+          credential: savedCredential,
+        });
+
+        const savedUser = await manager.save(createdUser);
+
+        return savedUser;
       });
-      const savedUser = await this.repository.save(createdUser);
+      // const savedUser = await this.repository.save(createdUser);
 
       const { credential: newCredential, ...rest } = savedUser;
       // El { credential: newCredential } esta renombrando el atributo credential a newCredential.
       // Para evitar que choque con el parametro de la funcion que se llama igual.
 
       return rest;
-    } catch {
-      throw Error("Cannot create user");
+    } catch (error) {
+      throw Error(error);
     }
   }
 

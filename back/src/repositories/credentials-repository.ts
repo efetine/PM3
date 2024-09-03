@@ -11,14 +11,13 @@ export class CredentialsRepository {
     this.repository = AppDataSource.getRepository(Credential);
   }
 
-  async create(credential: CreateCredentialDTO): Promise<ICredential> {
+  create(credential: CreateCredentialDTO): ICredential {
     try {
       const createdCredential = this.repository.create(credential);
-      const savedCredential = await this.repository.save(createdCredential);
 
-      return savedCredential;
-    } catch {
-      throw Error("Cannot create credential");
+      return createdCredential;
+    } catch (error) {
+      throw Error(error);
     }
   }
 

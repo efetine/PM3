@@ -29,6 +29,7 @@
   margin-bottom: 1.25rem;
   font-size: 1.2rem;
   font-weight: bold;
+  text-wrap: pretty;
 }
 
 .banner-title {

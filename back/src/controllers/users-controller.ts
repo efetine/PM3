@@ -45,7 +45,8 @@ export class UsersController {
       }
 
       res.status(200).json(user);
-    } catch {
+    } catch (error) {
+      console.log(error);
       res.status(500).json({
         error: "Internal Server Error",
       });
@@ -74,7 +75,8 @@ export class UsersController {
       const newUser = await this.usersService.create(user, credential);
 
       res.status(201).json(newUser);
-    } catch {
+    } catch (error) {
+      console.log(error);
       res.status(500).json({
         error: "Internal Server Error",
       });

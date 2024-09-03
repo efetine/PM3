@@ -9,6 +9,7 @@ export function Home() {
       <div className="home-background">
         <div className="home-container">
           <div className="internal-section">
+            <h1>Conoce sobre tu salud mental </h1>
             <div className="internal-item hover-shadow">
               <img
                 src="https://www.lasalle.edu.co/wcm/connect/f9125da4-9168-4666-a1d3-cf572e52d9af/Banner-El-arte-de-cuidar-tu-salud-mental+1.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-f9125da4-9168-4666-a1d3-cf572e52d9af-oHtpAzG"

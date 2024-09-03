@@ -1,14 +1,17 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux";
 
+import { store } from "./store/store";
 import { Home } from "./views/Home/Home";
 import { Information } from "./views/Information/Information";
 import { Register } from "./views/Register/Register";
 import { Login } from "./views/Login/Login";
 import { Appointments } from "./views/Appoitments/Appointments";
 import { MainLayout } from "./components/layouts/MainLayout";
-import { NewAppoitment } from "./components/Appointments/NewAppoitment";
+import { AddAppointment } from "./views/AddAppointment/AddAppointment";
+import { ProtectedRoute } from "./components/layouts/ProtectedRoute/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -32,12 +35,17 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: "appointments",
-        element: <Appointments />,
-      },
-      {
-        path: "appointments/new",
-        element: <NewAppoitment />,
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: "appointments",
+            element: <Appointments />,
+          },
+          {
+            path: "appointments/add",
+            element: <AddAppointment />,
+          },
+        ],
       },
     ],
   },
@@ -45,6 +53,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </StrictMode>
 );

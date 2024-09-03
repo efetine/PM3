@@ -9,9 +9,9 @@ export class CredentialsService {
     this.repository = new CredentialsRepository();
   }
 
-  async create(credential: CreateCredentialDTO) {
+  create(credential: CreateCredentialDTO) {
     try {
-      const newCredential = await this.repository.create(credential);
+      const newCredential = this.repository.create(credential);
 
       return newCredential;
     } catch {
