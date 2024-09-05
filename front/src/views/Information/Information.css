@@ -3,11 +3,11 @@
   flex-direction: column;
   min-height: 100vh;
   background-color: black;
+  padding-bottom: 2rem;
 }
 
 .internal-information {
   flex: 1;
-  padding: 2rem;
   background-color: black;
   color: white;
 }
@@ -114,4 +114,40 @@
   background-color: #ffffff;
   color: #8e2de2;
   transform: scale(1.05);
+}
+
+.information-nav {
+  background-color: #000000;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.information-text {
+  color: #fff;
+  margin: 0;
+  padding-right: 1rem;
+  font-size: 2rem;
+}
+
+.information-buttons {
+  display: flex;
+}
+
+.information-button {
+  background-color: #6200ea;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  margin-left: 0.75rem;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.information-button:hover {
+  background-color: #3700b3;
 }

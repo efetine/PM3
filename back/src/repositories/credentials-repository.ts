@@ -23,13 +23,11 @@ export class CredentialsRepository {
 
   async getByUsernameAndPassword({
     username,
-    password,
-  }: UserLoginDTO): Promise<ICredential | null> {
+  }: Pick<UserLoginDTO, "username">): Promise<ICredential | null> {
     try {
       const credential = await this.repository.findOne({
         where: {
           username,
-          password,
         },
       });
 

@@ -1,11 +1,10 @@
 import axios from "axios";
-import "./Appointments.css";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import "./Appointments.css";
 import { Banner } from "../../components/Banner/Banner";
-import { useDispatch, useSelector } from "react-redux";
 import {
   cancelAppointment,
   setAppointments,
@@ -13,12 +12,11 @@ import {
 
 export function Appointments() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userId = useSelector((state) => state.user.user.id);
   const appointments = useSelector((state) => state.appointments.appointments);
-  console.log({ appointments });
-  const dispatch = useDispatch();
 
-  const handleCancelAppointment = async (appointmentId) => {
+  const appointmentCancel = async (appointmentId) => {
     try {
       const response = await axios.post(
         `http://localhost:3000/appointments/cancel/${appointmentId}`
@@ -38,6 +36,16 @@ export function Appointments() {
       if (response.status === 500) {
         alert("Error interno");
       }
+    }
+  };
+
+  const handleConfirmCancelation = (appointmentId) => {
+    const isConfirmed = confirm(
+      "Estas seguro de que quieres cancelar el turno?"
+    );
+
+    if (isConfirmed === true) {
+      appointmentCancel(appointmentId);
     }
   };
 
@@ -89,7 +97,7 @@ export function Appointments() {
                   <button
                     className="cancel-button"
                     disabled={appointment.status === "cancelled"}
-                    onClick={() => handleCancelAppointment(appointment.id)}
+                    onClick={() => handleConfirmCancelation(appointment.id)}
                   >
                     Cancelar
                   </button>
@@ -102,10 +110,3 @@ export function Appointments() {
     </div>
   );
 }
-
-/* /* {" "}
-{view === "viewAppoitments" ? (
-  <viewAppoitments setView={setView} />
-) : view === "UserAppoitments" ? (
-  <UserAppoitments setView={setView} />
-</> */

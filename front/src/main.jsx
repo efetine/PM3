@@ -8,7 +8,7 @@ import { Home } from "./views/Home/Home";
 import { Information } from "./views/Information/Information";
 import { Register } from "./views/Register/Register";
 import { Login } from "./views/Login/Login";
-import { Appointments } from "./views/Appoitments/Appointments";
+import { Appointments } from "./views/Appointments/Appointments";
 import { MainLayout } from "./components/layouts/MainLayout";
 import { AddAppointment } from "./views/AddAppointment/AddAppointment";
 import { ProtectedRoute } from "./components/layouts/ProtectedRoute/ProtectedRoute";

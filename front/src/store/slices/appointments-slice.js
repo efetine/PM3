@@ -33,7 +33,6 @@ export const appointmentsSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { setAppointments, deleteAppointments, cancelAppointment } =
   appointmentsSlice.actions;
 

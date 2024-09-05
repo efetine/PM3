@@ -3,7 +3,6 @@ import { CreateUserDTO } from "../dto/create-user-dto";
 import { UserByIdDTO } from "../dto/user-by-id-dto";
 import { UserLoginDTO } from "../dto/user-login-dto";
 import { IUser } from "../interfaces/user-interface";
-import { CredentialsRepository } from "../repositories/credentials-repository";
 import { UsersRepository } from "../repositories/users-repository";
 import { CredentialsService } from "./credentials-service";
 
@@ -25,9 +24,9 @@ export class UsersService {
   }
 
   async create(user: CreateUserDTO, credential: CreateCredentialDTO) {
-    const credentialsService = new CredentialsRepository();
+    const credentialsService = new CredentialsService();
 
-    const createdCredential = credentialsService.create(credential);
+    const createdCredential = await credentialsService.create(credential);
 
     const newUser = await this.usersRepository.create(user, createdCredential);
 

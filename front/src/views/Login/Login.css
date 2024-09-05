@@ -45,8 +45,8 @@
   border: 1px solid #ccc;
   font-size: 1.125rem;
   box-sizing: border-box;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
+  /* background-color: rgba(0, 0, 0, 0.8);
+  color: white; */
 }
 
 .login-form button {

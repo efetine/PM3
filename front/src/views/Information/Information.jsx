@@ -1,13 +1,37 @@
 import React from "react";
 import { Banner } from "../../components/Banner/Banner";
 import "./Information.css";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export function Information() {
+  const user = useSelector((state) => state.user.user);
+
   return (
     <div className="information-page">
       <Banner />
+      {user === null ? (
+        <div className="information-nav">
+          <p className="information-text">
+            ¿Deseas acceder a nuestros servicios?
+          </p>
+          <div className="information-buttons">
+            <Link to="/register" className="information-button">
+              Regístrate
+            </Link>
+            <Link to="/login" className="information-button">
+              Inicia Sesión
+            </Link>
+          </div>
+        </div>
+      ) : null}
+
       <div className="internal-information">
         <div className="info-sections">
+          <h1>
+            Descubra nuestras especialidades terapéuticas y explore las diversas
+            opciones que ofrecemos para su bienestar.
+          </h1>
           <div className="info-section">
             <img
               src="https://i.pinimg.com/564x/ff/7c/0d/ff7c0d1bc118421c59f5f4cc626c274d.jpg"

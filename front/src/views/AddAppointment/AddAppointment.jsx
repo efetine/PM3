@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import "./AddAppointment.css";
 
 export function AddAppointment() {
   const navigate = useNavigate();
@@ -13,6 +14,13 @@ export function AddAppointment() {
 
     const date = formData.get("date");
     const time = formData.get("time");
+
+    const selectedDate = new Date(`${date}T00:00:00`);
+
+    if (selectedDate.getDay() === 0) {
+      alert("No se pueden agendar turnos los domingos.");
+      return;
+    }
 
     try {
       const response = await axios.post(
@@ -51,6 +59,7 @@ export function AddAppointment() {
             type="date"
             placeholder="Fecha del turno"
             min={new Date().toISOString().split("T")[0]}
+            required
           />
         </div>
         <div>
@@ -59,9 +68,10 @@ export function AddAppointment() {
             id="time"
             name="time"
             type="time"
-            step={2}
-            placeholder="Hora del turno"
-            // min={new Date().toISOString().split("T")[1]}
+            required
+            step="1"
+            min="07:00"
+            max="21:00"
           />
         </div>
         <button type="submit">Agregar</button>

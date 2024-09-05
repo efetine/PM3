@@ -8,6 +8,14 @@ export function Navbar() {
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
+  const handleLogout = () => {
+    const isConfirmed = confirm("Estas seguro de que deseas salir?");
+
+    if (isConfirmed === true) {
+      dispatch(logout());
+    }
+  };
+
   return (
     <nav>
       <div className="nav-group">
@@ -28,7 +36,7 @@ export function Navbar() {
         ) : (
           <>
             <span>{user.name}</span>
-            <button onClick={() => dispatch(logout())}>Logout</button>
+            <button onClick={handleLogout}>Logout</button>
           </>
         )}
       </div>
